@@ -5,11 +5,15 @@ void main() {
   runApp(MaterialApp(home: id_card()));
 }
 
-// stateless widget is for quickly testing you scaffold with hot reload.
-//     #1. Hot Restart,
-//     #2. Make changes in scaffold and save,
-//     #3. Changes will now show in app in realtime.
-class id_card extends StatelessWidget {
+class id_card extends StatefulWidget {
+  @override
+  _id_card_state createState() => _id_card_state();
+}
+
+class _id_card_state extends State<id_card> {
+
+  int level = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +75,24 @@ class id_card extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
+            Text(
+              'LEVEL',
+              style: TextStyle(
+                color: Colors.grey,
+                letterSpacing: 2,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              '$level',
+              style: TextStyle(
+                color: Colors.amberAccent[200],
+                letterSpacing: 2,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 30),
             Row(
               children: <Widget>[
                 Icon(
@@ -90,6 +112,16 @@ class id_card extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.grey,
+        onPressed: () {
+          setState(() {
+            // update stateful anything inside widget
+            level += 1;
+          });
+        }
       ),
     );
   }
